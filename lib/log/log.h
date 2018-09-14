@@ -8,4 +8,5 @@
 #define AS printf("  [ %s ] ( " _STR(__LINE__) " )\r\n", __func__)
 #define TS(f,a...) printf(" [ %s ] ( " _STR(__LINE__) " ) : " f "\r\n", __func__, ##a)
 
+void log_array(int a[], int len);
 #endif  /* __LOG_H__ */

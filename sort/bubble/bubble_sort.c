@@ -1,35 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include "../../lib/log/log.h"
-#include <sys/time.h>
-#define SWAP(a, b)                                      \
-    do{int t_t = a;t_t = a; a = b; b = t_t; }while(0)   \
-
-long systime(void)
-{
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec;
-}
-
-long systime_ms(void)
-{
-    struct timeval tv;
-    long r;
-    gettimeofday(&tv, NULL);
-    r = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-    return r;
-}
-
-long systime_us(void)
-{
-    struct timeval tv;
-    long r;
-    gettimeofday(&tv, NULL);
-    r = tv.tv_sec * 1000000 + tv.tv_usec;
-    return r;
-}
+#include "log.h"
+#include "misc.h"
 
 int bubble_sort(int array[], int len)
 {
@@ -202,7 +173,7 @@ void heapsort(int *a, int n)
     }
 }
 
-inline void merge(int *a, int left, int mid, int right)
+void merge(int *a, int left, int mid, int right)
 {
     int len = right - left + 1;
     int *temp = (int*)malloc(sizeof(a[0]) * len);
@@ -244,48 +215,8 @@ void mergesort(int *a, int left, int right)
     merge(a, left, mid, right);
 }
 
-int _rand(int l, int h)
-{
-    return rand() % (h - l) + l;
-}
-
-void range(int data[], int len, int b, int top)
-{
-    int i, p = 1324;
-    srand(systime_ms());
-    for(i = 0; i < len; i++)
-    {
-        data[i] = _rand(b, top);
-        /* p = data[i] + 1; */
-    }
-}
-
-void log_array(int a[], int len)
-{
-    for(int i = 0; i < len; i++)
-    {
-        printf("%d\t", a[i]);
-        if(i % 16 == 0)
-        {
-            printf("\r\n");
-        }
-    }
-    printf("\r\n");
-}
-
-void elapse(long *t)
-{
-    *t = systime_us();
-}
-
-long elape(long *t)
-{
-    long n = systime_us() - *t;
-    return n;
-}
-
 #define ARRAY_LEN 100
-int main(void)
+int bubble_sort_test(void)
 {
     int array[ARRAY_LEN];
     int array2[ARRAY_LEN];
